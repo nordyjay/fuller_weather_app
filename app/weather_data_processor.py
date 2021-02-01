@@ -13,7 +13,7 @@ class CSVReader:
 
     def __init__(self):
         #self.path = path
-        self.dir = Path('/usr/src/weather_data/')
+        self.dir = Path('/usr/src/app/weather_data')
         print(self.dir)
         self.build_df()
         self.check_index()
@@ -35,7 +35,7 @@ class CSVReader:
             "Hmdx Flag",
             "Wind Chill Flag",
         ]
-        #self.preprocess_and_drop()
+        self.preprocess_and_drop()
 
     def build_df(self):
         self.df = (pd.read_csv(f) for f in self.dir.glob("*.csv"))
