@@ -35,7 +35,7 @@ class CSVReader:
             "Hmdx Flag",
             "Wind Chill Flag",
         ]
-        self.preprocess_and_drop()
+        #self.preprocess_and_drop()
 
     def build_df(self):
         self.df = (pd.read_csv(f) for f in self.dir.glob("*.csv"))
