@@ -1,9 +1,8 @@
 import pandas as pd
 from pathlib import Path
-import sys 
-
 import sys
 
+import sys
 
 
 class CSVReader:
@@ -12,8 +11,8 @@ class CSVReader:
     """
 
     def __init__(self):
-        #self.path = path
-        self.dir = Path('/usr/src/app/weather_data')
+        # self.path = path
+        self.dir = Path('app/weather_data')
         print(self.dir)
         self.build_df()
         self.check_index()
