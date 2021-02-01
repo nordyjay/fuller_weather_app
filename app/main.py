@@ -5,9 +5,9 @@ from weather_data_processor import CSVReader
 from weather_data_analyzer import OttawaWeatherAnalytics 
 import os
 
-#df = CSVReader().df
-df = pd.read_csv('ottawa_hourly_weather.csv', index_col = 0)
-df.index = pd.to_datetime(df.index)
+df = CSVReader().df
+#df = pd.read_csv('ottawa_hourly_weather.csv', index_col = 0)
+#df.index = pd.to_datetime(df.index)
 ana = OttawaWeatherAnalytics(df)
 import os 
 os.getcwd()
