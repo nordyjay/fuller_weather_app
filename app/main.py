@@ -5,8 +5,7 @@ from weather_data_processor import CSVReader
 from weather_data_analyzer import OttawaWeatherAnalytics 
 import os
 
-#df = CSVReader().df
-df = pd.read_csv('ottawa hourly_weather.csv', index_col = 0)
+df = CSVReader().df
 ana = OttawaWeatherAnalytics(df)
 
 st.title('Construction Worker Productivity and Temperature')
