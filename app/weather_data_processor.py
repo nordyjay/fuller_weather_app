@@ -12,7 +12,7 @@ class CSVReader:
 
     def __init__(self):
         # self.path = path
-        self.dir = Path('app/weather_data')
+        self.dir = Path('app/weather_data/')
         print(self.dir)
         self.build_df()
         self.check_index()
