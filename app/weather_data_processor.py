@@ -17,8 +17,6 @@ class CSVReader:
         self.build_df()
         self.check_index()
         self.drop_columns = [
-            "Longitude (x)",
-            "Latitude (y)",
             "Date/Time",
             "Year",
             "Month",
