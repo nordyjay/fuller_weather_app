@@ -1,4 +1,13 @@
-# streamlit-docker-example
+# Fuller Temperature vs Worker Efficiency App
+This app is to be used as an interative tool in order to determine construction worker efficiency as it realtes to temperature.  From time to time it may be down due to development but serves a s ainstrument for constuction companies to help plan their best use for labourers for outdoor construction in teh Ottawa are. 
+
+
+
+
+
+
+
+## For those of you who want to use the repo as a streamlit template
 
 Example on how to run and develop a [streamlit](https://github.com/streamlit/streamlit) application inside docker.
 
