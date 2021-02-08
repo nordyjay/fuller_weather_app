@@ -15,6 +15,7 @@ class ConstructionProductivityVisualizer():
 	def __init__(self): 
 		self.df = CSVReader().df
 		self.ana = OttawaWeatherAnalytics(self.df)
+		st.set_page_config(layout="wide") 
 		st.image('app/fuller_logo.jpg', width = 200)
 		st.title('Construction Worker Productivity and Temperature')
 
@@ -23,7 +24,6 @@ class ConstructionProductivityVisualizer():
 		self.nrc_paper_url = 'https://publications-cnrc.canada.ca/eng/view/ft/?id=52dc96d5-4ba0-40e6-98d2-8d388cba30cd'
 		self.month_selector()
 		self.side_bar_information()
-		self.productivity_button()
 	
 	def month_selector(self): 
 		self.month = st.select_slider('Select the month for productivity you wish to analyze',
@@ -40,11 +40,6 @@ class ConstructionProductivityVisualizer():
 				self.ana.plot_productivity_by_month(i = self.number_list)
 				st.plotly_chart(self.ana.plot_productivity_plot)
 
-	def productivity_button(self):
-		self.p_button = st.button('productivity') 
-		if self.p_button:
-			st.plotly_chart(self.ana.productivity_figure)
-
 
 	
 	def side_bar_information(self): 
@@ -53,8 +48,8 @@ class ConstructionProductivityVisualizer():
 		if self.choice == 'Method':
 			st.sidebar.markdown(f'The method we used to assemble this tool was by aggregating hourly weather data from the \
 			 Ottawa airport from the last ten years.  With this we are able to see clear seasonality and assign monthly productivity \
-			  using this function represented by this curve ') 
-			st.sidebar.plotly_chart(self.ana.prductivity_figure, width = 10)
+			  using this function represented by this curve') 
+			st.sidebar.plotly_chart(self.ana.prductivity_figure)
 		elif self.choice == 'Research': 
 			st.sidebar.markdown( f'The majority of findings used for this analysis was based of the Natioanl Research Council of Canada \
 			pulication "Productivity in Construction"  which can be found here: {self.nrc_paper_url}. \

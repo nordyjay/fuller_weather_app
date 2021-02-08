@@ -181,11 +181,11 @@ class OttawaWeatherAnalytics:
                 "yanchor": "top",
             },
             height = 400,
-            width = 400,
+            width = 370,
             xaxis_title="Worker Productivity",
             yaxis_title="Ambient Temperature",
             legend_title="Legend Title",
-            font=dict(family="Franklin Gothic", size=18, color="Black"),
+            font=dict(family="Franklin Gothic", size=10, color="Black"),
         )
 
         self.prductivity_figure = self.fig1
