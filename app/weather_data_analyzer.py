@@ -180,6 +180,8 @@ class OttawaWeatherAnalytics:
                 "xanchor": "center",
                 "yanchor": "top",
             },
+            height = 400,
+            width = 400,
             xaxis_title="Worker Productivity",
             yaxis_title="Ambient Temperature",
             legend_title="Legend Title",
