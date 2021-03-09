@@ -1,6 +1,8 @@
 # Fuller Temperature vs Worker Efficiency App
 This app is to be used as an interative tool in order to determine construction worker efficiency as it realtes to temperature.  From time to time it may be down due to development but serves as an instrument for constuction companies to help plan their best use for labourers for outdoor construction in the Ottawa area. 
 
+* to view the app click here: https://share.streamlit.io/nordyjay/fuller_weather_app/main/app/main.py
+
 
 
 
