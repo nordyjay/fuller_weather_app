@@ -30,7 +30,6 @@ class ConstructionProductivityVisualizer():
 		self.month_selector()
 		self.side_bar_information()
 		self.derive_monthly_work_capacity_insight()
-		
 
 	
 	def month_selector(self): 
@@ -41,12 +40,20 @@ class ConstructionProductivityVisualizer():
 		st.plotly_chart(fig)
 
 	def derive_monthly_work_capacity_insight(self): 
+		worker_rules = {0 : 8, 
+						75 : 7.5, 
+               			55 : 7.3, 
+               			40 : 6.6}
 		if st.button(f'Derive Worker Capacities for {self.month}'):
 			st.markdown('Based on 4 hour work period we can say with 95 confidence to expect:')
 			self.sort_dict = (self.cwi.generate_work_capacity_insights(i = self.cwi.swap_dict[self.month]))
-			del self.sort_dict['0']
+			#self.sort_dict['0'] = 
 			for key, value in self.sort_dict.items():
-				st.markdown(f'* {value} days working at {key} ')
+				if key == '0': 
+					st.markdown(f'* {value} working af full capacity. (A typical 8 hour workday will have  {worker_rules[int(key[0:2])]} productive hours in it.)')
+				else:
+					st.markdown(f'* {value} days working at {key}. (A typical 8 hour workday will have  {worker_rules[int(key[0:2])]} productive hours in it.)')
+					
 
 	
 	def side_bar_information(self): 
