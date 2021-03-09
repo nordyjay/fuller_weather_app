@@ -29,12 +29,14 @@ class ConstructionProductivityVisualizer():
 		self.nrc_paper_url = 'https://publications-cnrc.canada.ca/eng/view/ft/?id=52dc96d5-4ba0-40e6-98d2-8d388cba30cd'
 		self.month_selector()
 		self.side_bar_information()
-		self.derive_monthly_work_capacity_insight()
+		#self.derive_monthly_work_capacity_insight()
 
 	
 	def month_selector(self): 
 		self.month = st.select_slider('Select the month for productivity you wish to analyze',
 										options = list(self.cwi.month_list))
+		self.derive_monthly_work_capacity_insight()
+
 		fig = self.cwi.plot_productivity_by_month(i = self.cwi.swap_dict[self.month])
 		
 		st.plotly_chart(fig)
@@ -59,26 +61,27 @@ class ConstructionProductivityVisualizer():
 	def side_bar_information(self): 
 		st.sidebar.title('More About This Tool')
 		self.choice = st.sidebar.selectbox('Learn more about the methodology used for this tool', 
-			('Method', 'Research', 'Assumptions', 'Data'))
+			('Data', 'Research', 'Method', 'Assumptions'))
+		if self.choice == "Data": 							
+			st.sidebar.markdown(f'The data was collected from Government of Canada webside site from the Ottawa airport location\
+					and includes a forecasting bounday outlined in the map below')
+			df = pd.DataFrame(np.random.randn(1000, 2) / [50, 50] + [45.38, -75.72],columns=['lat', 'lon'])
+			st.sidebar.map(df)
 		if self.choice == 'Method':
 			st.sidebar.markdown(f'The method we used to assemble this tool was by aggregating hourly weather data from the \
-			 Ottawa airport from the last ten years.  With this we are able to see clear seasonality and assign monthly productivity \
-			  using this function represented by this curve') 
+			 Ottawa airport weather station from the last ten years.  With this we are able to see clear seasonality and assign monthly productivity \
+			  using this function represented by this curve below curve.') 
 			st.sidebar.plotly_chart(self.cwi.prductivity_figure)
 		elif self.choice == 'Research': 
-			st.sidebar.markdown( f'The majority of findings used for this analysis was based of the Natioanl Research Council of Canada \
-			pulication "Productivity in Construction"  which can be found here: {self.nrc_paper_url}. \
-			It serves as a great guide of overall construction productivty and has a candian perspective on the matter.')
+			st.sidebar.markdown( f"Findings used for this analysis was based of the Natioanl Research Council of Canada \
+			pulication 'Productivity in Construction'  which can be found here: {self.nrc_paper_url}. \
+			It serves as a great guide of overall construction productivty and has a candian perspective on the matter.\
+			The worker capacities were derived Fuller's proprietary wokrplace research.")
 		elif self.choice == 'Assumptions': 
 			st.sidebar.markdown(f'This tool only considers temerature as it realtes to worker productivity. \
 			It takes into account extremes such as wind chill and humidity into the plots and insights you see.\
-			However, it does not include other factors such as precipitation and wind strength that are important factors in work site productivity.')
-		else: 
-			st.sidebar.markdown(f'The data was collected from Government of Canada webside site from the Ottawa airport location\
-				and includes a forecasting bounday outlined in the map below')
-
-			df = pd.DataFrame(np.random.randn(1000, 2) / [50, 50] + [45.38, -75.72],columns=['lat', 'lon'])
-			st.sidebar.map(df)
+			Precipitation insights to come.')
+		
 
 if __name__ == "__main__":
     # execute only if run as a script
