@@ -7,10 +7,10 @@ from  combined_weather_insights import OttawaCombinedProductivity
 import os
 
 
-
+np.random.seed(100)
 dir = Path('/usr/src/app/')
 file = 'daily_combined_data.csv'
-#st.text(file)
+
 
 cwi = OttawaCombinedProductivity(file = file)
 
@@ -26,7 +26,7 @@ class ConstructionProductivityVisualizer():
 		
 		st.subheader('Thomas Fuller Construction')
 		#self.productivity_list = ['productive', 'less productive']
-		#self.nrc_paper_url = 'https://publications-cnrc.canada.ca/eng/view/ft/?id=52dc96d5-4ba0-40e6-98d2-8d388cba30cd'
+		self.nrc_paper_url = 'https://publications-cnrc.canada.ca/eng/view/ft/?id=52dc96d5-4ba0-40e6-98d2-8d388cba30cd'
 		self.month_selector()
 		self.side_bar_information()
 		self.derive_monthly_work_capacity_insight()
@@ -46,13 +46,7 @@ class ConstructionProductivityVisualizer():
 			self.sort_dict = (self.cwi.generate_work_capacity_insights(i = self.cwi.swap_dict[self.month]))
 			del self.sort_dict['0']
 			for key, value in self.sort_dict.items():
-				st.markdown(f'* {value} days working at {key}')
-
-
-
-
-		
-
+				st.markdown(f'* {value} days working at {key} ')
 
 	
 	def side_bar_information(self): 
@@ -73,7 +67,11 @@ class ConstructionProductivityVisualizer():
 			It takes into account extremes such as wind chill and humidity into the plots and insights you see.\
 			However, it does not include other factors such as precipitation and wind strength that are important factors in work site productivity.')
 		else: 
-			st.sidebar.markdown(f'The data was collected from Government of Canada data site')
+			st.sidebar.markdown(f'The data was collected from Government of Canada webside site from the Ottawa airport location\
+				and includes a forecasting bounday outlined in the map below')
+
+			df = pd.DataFrame(np.random.randn(1000, 2) / [50, 50] + [45.38, -75.72],columns=['lat', 'lon'])
+			st.sidebar.map(df)
 
 if __name__ == "__main__":
     # execute only if run as a script

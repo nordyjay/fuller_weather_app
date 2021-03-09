@@ -109,7 +109,7 @@ class OttawaCombinedProductivity():
         fig.add_trace(go.Scatter(x=self.monthly_data.loc[i, :].index,
                                  y = x_poly_val,
                                  #y=self.monthly_data['productivity'].loc[i,:], #.loc[i,:].values, 
-                                 fill='tonexty', line_color = 'hotpink',))
+                                 fill='tonexty', line_color = 'MediumPurple',))
         fig.update_layout(
             title={
                 'text': f"{self.tdi[i]} productivity",
