@@ -21,7 +21,8 @@ class OttawaCombinedProductivity():
         self.swap_dict = {'january':1,'february':2,'march':3, 'april': 4,'may': 5,
                            'june': 6,'july': 7,'august': 8,'september' : 9,
                             'october': 9, 'november': 11, 'december': 12}
-
+        self.bins = [-30, -20, -10, -5, 0, 5, 10, 20, 25, 30, 40]
+        self.labels = [.50, .6, .7, .84, .95, .99, 1, .94, .85, .75]
         self.productivity_curve()
         self.make_monthly_data()
         self.make_productivity_curve()
@@ -82,8 +83,8 @@ class OttawaCombinedProductivity():
                 'x':0.5,
                 'xanchor': 'center',
                 'yanchor': 'top'},
-            xaxis_title="Worker Productivity",
-            yaxis_title="Ambient Temperature",
+            xaxis_title="Ambient Temperature",
+            yaxis_title="Worker Productivity",
             legend_title="Legend Title",
             font=dict(
                 family="Franklin Gothic",
@@ -100,9 +101,13 @@ class OttawaCombinedProductivity():
         '''
         self.tdi = self.month_dict
         self.tdi[i] = self.tdi[i]
+        self.monthly_data['sam_conditions'] = pd.to_numeric(pd.cut(self.monthly_data['extremes'],
+                                                      bins = self.bins,
+                                                      labels = self.labels,
+                                                     ))
         fit_x = self.monthly_data.loc[i, :].index
-        fit_y = self.monthly_data['productivity'].loc[i, :]
-        y_poly_fit = np.polyfit(fit_x, fit_y, deg = 10)
+        fit_y = self.monthly_data['sam_conditions'].loc[i, :]
+        y_poly_fit = np.polyfit(fit_x, fit_y, deg = 4)
         x_poly_val = np.polyval(y_poly_fit, fit_x)
          
         fig = go.Figure()
