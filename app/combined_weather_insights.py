@@ -22,7 +22,7 @@ class OttawaCombinedProductivity():
                            'june': 6,'july': 7,'august': 8,'september' : 9,
                             'october': 9, 'november': 11, 'december': 12}
         self.bins = [-30, -20, -10, -5, 0, 5, 10, 20, 25, 30, 40]
-        self.labels = [.50, .6, .7, .84, .95, .99, 1, .94, .85, .75]
+        self.labels = [.58, .6, .7, .84, .95, .99, 1, .94, .85, .75]
         self.productivity_curve()
         self.make_monthly_data()
         self.make_productivity_curve()
@@ -107,8 +107,11 @@ class OttawaCombinedProductivity():
                                                      ))
         fit_x = self.monthly_data.loc[i, :].index
         fit_y = self.monthly_data['sam_conditions'].loc[i, :]
-        y_poly_fit = np.polyfit(fit_x, fit_y, deg = 4)
+        y_poly_fit = np.polyfit(fit_x, fit_y, deg = 8)
         x_poly_val = np.polyval(y_poly_fit, fit_x)
+        self.x_poly_mean = np.mean(fit_y).round(2)
+
+
          
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=self.monthly_data.loc[i, :].index,
@@ -119,7 +122,7 @@ class OttawaCombinedProductivity():
                                  ))
         fig.update_layout(
             title={
-                'text': f"{self.tdi[i]} productivity",
+                'text': f"{self.tdi[i].capitalize()} Productivity",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
@@ -139,7 +142,7 @@ class OttawaCombinedProductivity():
         
         
         self.plot_productivity_plot = fig
-        return self.plot_productivity_plot
+        return self.plot_productivity_plot, self.x_poly_mean
     
     
         
